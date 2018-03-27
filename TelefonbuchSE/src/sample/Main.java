@@ -1,19 +1,25 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        SearchArea searchArea = new SearchArea();
+        AddDeleteArea addDeleteArea = new AddDeleteArea();
+        BorderPane root = new BorderPane();
+
+        root.setTop(searchArea.getAnchorPane());
+        root.setBottom(addDeleteArea.getAnchorPane());
+
+        primaryStage.setTitle("Telefonbuch");
+        primaryStage.setScene(new Scene(root, 600, 800));
         primaryStage.setResizable(false);
+
         primaryStage.show();
     }
 
