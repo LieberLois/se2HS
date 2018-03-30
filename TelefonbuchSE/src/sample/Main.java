@@ -12,9 +12,11 @@ public class Main extends Application {
         SearchArea searchArea = new SearchArea();
         AddDeleteArea addDeleteArea = new AddDeleteArea();
         BorderPane root = new BorderPane();
+        EntryArea entryArea = new EntryArea();
 
         root.setTop(searchArea.getAnchorPane());
         root.setBottom(addDeleteArea.getAnchorPane());
+        root.setCenter(entryArea.getTable());
 
         primaryStage.setTitle("Telefonbuch");
         primaryStage.setScene(new Scene(root, 600, 800));
