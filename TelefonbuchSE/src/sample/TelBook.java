@@ -10,7 +10,11 @@ public class TelBook {
     private final ObservableList<TelNumber> oTelNumbers = FXCollections.observableList(new ArrayList<>());
 
     public TelBook(){
-        oTelNumbers.add(new TelNumber("Samuel", "Glogger", "+49 66666"));
+        addNumber(new TelNumber("Test", "Beta", "1234"));
+    }
+
+    public void addNumber(TelNumber telNumber){
+        oTelNumbers.add(telNumber);
     }
 
     public ObservableList<TelNumber> getNumbers(){

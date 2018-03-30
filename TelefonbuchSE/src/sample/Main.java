@@ -7,12 +7,17 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    TelBook telBook;
+    EntryArea entryArea;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
+        telBook = new TelBook();
         SearchArea searchArea = new SearchArea();
         AddDeleteArea addDeleteArea = new AddDeleteArea();
         BorderPane root = new BorderPane();
-        EntryArea entryArea = new EntryArea();
+        entryArea = new EntryArea();
+
 
         root.setTop(searchArea.getAnchorPane());
         root.setBottom(addDeleteArea.getAnchorPane());
