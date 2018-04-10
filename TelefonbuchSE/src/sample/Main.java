@@ -15,15 +15,25 @@ public class Main extends Application {
 
 
     //static ObservableList<TelNumber> telefonEntries = FXCollections.observableArrayList(new ArrayList<>());
-    static TelBook telBook = new TelBook();
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+        TelBook telBook = new TelBook();
         BorderPane root = new BorderPane();
-
-
-        SearchArea searchArea = new SearchArea();
-        AddDeleteArea adddeleteArea = new AddDeleteArea();
         EntryArea entryArea = new EntryArea(telBook.getNumbers());
+
+        SearchArea searchArea = new SearchArea(telBook);
+        AddDeleteArea adddeleteArea = new AddDeleteArea(
+
+                () -> {
+                    telBook.getList().add(new TelNumber());
+                },
+
+                () -> {
+                    List<TelNumber> selected = entryArea.getSelectedEntries();
+                    telBook.getList().removeAll(selected);
+                });
+
 
         root.setTop(searchArea.getAnchorPane());
         root.setBottom(adddeleteArea.getAnchorPane());
@@ -36,18 +46,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-    }
-
-    public static void addEntry(TelNumber telNumber){
-        telBook.getNumbers().add(telNumber);
-    }
-
-    public static void deleteEntries(List<TelNumber> delete){
-        telBook.getNumbers().removeAll(delete);
-    }
-
-    public static TelBook getTelBook(){
-        return telBook;
     }
 
 }

@@ -11,17 +11,11 @@ import javafx.scene.layout.AnchorPane;
 public class AddDeleteArea {
 
     private final AnchorPane anchorPane = new AnchorPane();
-    private final Button deleteButton = new Button("Delete");
-    private final Button addButton = new Button("Add");
-    public AddDeleteArea(){
 
-        addButton.setOnAction(event -> {
-            Main.addEntry(new TelNumber());
-                });
+    public AddDeleteArea(Runnable onAdd, Runnable onDelete){
 
-        deleteButton.setOnAction(event -> {
-            // Remove selected Entries?!
-                });
+        final Button deleteButton = new Button("Delete");
+        final Button addButton = new Button("Add");
 
         AnchorPane.setRightAnchor(deleteButton, 10.0);
         AnchorPane.setBottomAnchor(deleteButton, 10.0);
@@ -32,6 +26,14 @@ public class AddDeleteArea {
         AnchorPane.setTopAnchor(deleteButton, 10.0);
         AnchorPane.setTopAnchor(addButton, 10.0);
         anchorPane.getChildren().addAll(addButton, deleteButton);
+
+        addButton.setOnAction(event -> {
+            onAdd.run();
+        });
+
+        deleteButton.setOnAction(event -> {
+            onDelete.run();
+        });
     }
 
     public AnchorPane getAnchorPane() {
