@@ -32,5 +32,9 @@ public class TelBook {
         });
     }
 
+    public void save(){
+        FileSystem.writeFile(oTelNumbers);
+    }
+
 
 }

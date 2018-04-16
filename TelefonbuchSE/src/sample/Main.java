@@ -13,12 +13,17 @@ import java.util.List;
 
 public class Main extends Application {
 
-
-    //static ObservableList<TelNumber> telefonEntries = FXCollections.observableArrayList(new ArrayList<>());
+    private TelBook telBook;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        TelBook telBook = new TelBook();
+        telBook = new TelBook();
+        List<TelNumber> fromFile = FileSystem.readEntriesFromFile();
+
+        if (fromFile != null) {
+            fromFile.forEach(entry -> telBook.getList().add(entry));
+        }
+
         BorderPane root = new BorderPane();
         EntryArea entryArea = new EntryArea(telBook.getNumbers());
 
@@ -46,6 +51,10 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public void stop(){
+        telBook.save();
     }
 
 }
