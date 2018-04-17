@@ -3,13 +3,20 @@ package sample;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+
+
 import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,8 +31,15 @@ public class Main extends Application {
         BorderPane b1 = createTelefonArea(tb1, true);
         BorderPane b2 = createTelefonArea(new TelBook(null), false);
 
+
+
+
+
         root.setLeft(b1);
         root.setRight(b2);
+
+
+
         primaryStage.setTitle("Telefonbuch");
         primaryStage.setScene(new Scene(root, 700, 500));
         primaryStage.setResizable(false);
@@ -45,6 +59,27 @@ public class Main extends Application {
         root.setTop(searchArea.getAnchorPane());
 
         root.setBottom(isOwnTelBook ? createAddDelete(telBook, entryArea) : createImport(telBook, entryArea));
+
+        if(!isOwnTelBook){
+            entryArea.getAnchorPane().setOnDragOver(e -> {
+                e.acceptTransferModes(TransferMode.COPY);
+            });
+
+            entryArea.getAnchorPane().setOnDragDropped(e -> {
+                final Dragboard db = e.getDragboard();
+                Path path;
+
+                if(db.hasFiles() && (db.getFiles().get(0).getPath().endsWith(".json") || db.getFiles().get(0).getPath().endsWith(".txt"))){
+                    path = Paths.get(db.getFiles().get(0).getPath());
+                    TelBook imported = new TelBook(path);
+                    entryArea.setItems(imported.getNumbers());
+                } else {
+                    e.consume();
+                }
+
+            });
+
+        }
 
         root.setCenter(entryArea.getAnchorPane());
         return root;
