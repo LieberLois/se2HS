@@ -16,6 +16,7 @@ public class EntryArea {
 
     public EntryArea(ObservableList<TelNumber> telefonEntries) {
         tableView = new TableView<>();
+
         AnchorPane.setLeftAnchor(tableView, 10.0);
         AnchorPane.setRightAnchor(tableView, 10.0);
         AnchorPane.setTopAnchor(tableView, 0.0);
@@ -28,20 +29,26 @@ public class EntryArea {
         lastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         lastNameCol.setCellFactory(cellFactory);
         lastNameCol.setOnEditCommit(t -> getCurrentRow(t).setLastName(t.getNewValue()));
+        lastNameCol.setMinWidth(100);
+        lastNameCol.setMaxWidth(100);
 
         TableColumn<TelNumber, String> firstNameCol = new TableColumn<>("First Name");
         firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         firstNameCol.setCellFactory(cellFactory);
         firstNameCol.setOnEditCommit(t -> getCurrentRow(t).setFirstName(t.getNewValue()));
+        firstNameCol.setMinWidth(100);
+        firstNameCol.setMaxWidth(100);
 
-        TableColumn<TelNumber, String> emailCol = new TableColumn<>("Number");
-        emailCol.setCellValueFactory(new PropertyValueFactory<>("number"));
-        emailCol.setCellFactory(cellFactory);
-        emailCol.setOnEditCommit(t -> getCurrentRow(t).setNumber(t.getNewValue()));
+        TableColumn<TelNumber, String> numberCol = new TableColumn<>("Number");
+        numberCol.setCellValueFactory(new PropertyValueFactory<>("number"));
+        numberCol.setCellFactory(cellFactory);
+        numberCol.setOnEditCommit(t -> getCurrentRow(t).setNumber(t.getNewValue()));
+        numberCol.setMinWidth(100);
+        numberCol.setMaxWidth(100);
 
         tableView.getColumns().add(firstNameCol);
         tableView.getColumns().add(lastNameCol);
-        tableView.getColumns().add(emailCol);
+        tableView.getColumns().add(numberCol);
         tableView.setItems(telefonEntries);
         tableView.setEditable(true);
     }

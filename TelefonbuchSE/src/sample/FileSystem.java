@@ -19,9 +19,9 @@ import java.util.List;
 
 public class FileSystem {
 
-    private static Path path = Paths.get("telBook.json");
+    private static Path defaultPath = Paths.get("telBook.json");
 
-    public static List<TelNumber> readEntriesFromFile() {
+    public static List<TelNumber> readEntriesFromFile(Path path) {
 
         if(!Files.exists(path)){
             try {
@@ -52,7 +52,7 @@ public class FileSystem {
         return entries;
     }
 
-    public static void writeFile(List<TelNumber> entries) {
+    public static void writeFile(List<TelNumber> entries, Path path) {
 
         if(!Files.exists(path)){
             try {
@@ -78,5 +78,9 @@ public class FileSystem {
         } catch ( IOException e) {
             e. printStackTrace ();
         }
+    }
+
+    public static Path getDefaultPath(){
+        return defaultPath;
     }
 }
