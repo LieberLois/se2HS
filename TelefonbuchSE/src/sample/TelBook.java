@@ -31,6 +31,7 @@ public class TelBook {
 
     public List<TelNumber> getList(){return oTelNumbers;}
 
+
     public ObservableList<TelNumber> getNumbers(){
         return filteredNumbers;
     }
@@ -49,4 +50,17 @@ public class TelBook {
     }
 
 
+    public void read(Path path) {
+        oTelNumbers.clear();
+        if(path != null) {
+            List<TelNumber> fromFile = FileSystem.readEntriesFromFile(path);
+
+            if (fromFile != null) {
+                //fromFile.forEach(entry -> oTelNumbers.add(entry));
+                oTelNumbers.addAll(fromFile);
+            }
+        }
+
+
+    }
 }

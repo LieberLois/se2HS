@@ -24,16 +24,12 @@ import java.util.List;
 public class Main extends Application {
 
     private final TelBook tb1 = new TelBook(FileSystem.getDefaultPath());
-
+    private final TelBook tb2 = new TelBook(null);
     @Override
     public void start(Stage primaryStage) throws Exception {
         BorderPane root = new BorderPane();
         BorderPane b1 = createTelefonArea(tb1, true);
-        BorderPane b2 = createTelefonArea(new TelBook(null), false);
-
-
-
-
+        BorderPane b2 = createTelefonArea(tb2, false);
 
         root.setLeft(b1);
         root.setRight(b2);
@@ -47,9 +43,6 @@ public class Main extends Application {
     }
 
     private BorderPane createTelefonArea(TelBook telBook, boolean isOwnTelBook) {
-
-
-
         EntryArea entryArea = new EntryArea(telBook.getNumbers());
 
         SearchArea searchArea = new SearchArea(telBook);
@@ -71,13 +64,16 @@ public class Main extends Application {
 
                 if(db.hasFiles() && (db.getFiles().get(0).getPath().endsWith(".json") || db.getFiles().get(0).getPath().endsWith(".txt"))){
                     path = Paths.get(db.getFiles().get(0).getPath());
-                    TelBook imported = new TelBook(path);
-                    entryArea.setItems(imported.getNumbers());
+
+                    tb2.read(path);
+
                 } else {
                     e.consume();
                 }
 
             });
+
+
 
         }
 
@@ -90,11 +86,9 @@ public class Main extends Application {
                 () -> {
                     List<TelNumber> selected = entryArea.getSelectedEntries();
 
-                    selected.forEach(element -> {
-                        if(!(telBook.getNumbers().contains(element))){
-                            telBook.addNumber(element);
-                        }
-                    });
+                    selected.stream().filter(e -> {
+                        return (!(tb1.getNumbers().contains(e)));
+                    }).forEach(tb1::addNumber);
 
                 }
         );
