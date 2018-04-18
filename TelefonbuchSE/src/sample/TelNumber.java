@@ -22,6 +22,12 @@ public class TelNumber {
             isNew = false;
         }
 
+        public TelNumber(TelNumber telNumber){
+            this.lastName.set(telNumber.getLastName());
+            this.firstName.set(telNumber.getFirstName());
+            this.number.set(telNumber.getNumber());
+        }
+
         public String getLastName() {
             return lastName.get();
         }

@@ -86,9 +86,7 @@ public class Main extends Application {
                 () -> {
                     List<TelNumber> selected = entryArea.getSelectedEntries();
 
-                    selected.stream().filter(e -> {
-                        return (!(tb1.getNumbers().contains(e)));
-                    }).forEach(tb1::addNumber);
+                    selected.forEach(e -> tb1.addNumber(new TelNumber(e)));
 
                 }
         );
