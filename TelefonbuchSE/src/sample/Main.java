@@ -3,6 +3,7 @@ package sample;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.DragEvent;
@@ -10,6 +11,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
@@ -88,6 +90,16 @@ public class Main extends Application {
 
                     selected.forEach(e -> tb1.addNumber(new TelNumber(e)));
 
+                },
+
+                () -> {
+                    Stage fileChooserStage = new Stage();
+                    fileChooserStage.setTitle("File Chooser Sample");
+                    FileChooser fileChooser = new FileChooser();
+                    File file = fileChooser.showOpenDialog(fileChooserStage);
+                    if (file != null) {
+                        tb2.read(Paths.get(file.getPath()));
+                    }
                 }
         );
         return importArea.getAnchorPane();
