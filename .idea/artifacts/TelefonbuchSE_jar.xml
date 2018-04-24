@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TelefonbuchSE:jar">
+    <output-path>$PROJECT_DIR$</output-path>
+    <root id="archive" name="TelefonbuchSE.jar">
+      <element id="module-output" name="TelefonbuchSE" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jackson-databind-2.9.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jackson-annotations-2.9.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jackson-core-2.9.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

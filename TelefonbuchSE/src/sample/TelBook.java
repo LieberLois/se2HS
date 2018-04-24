@@ -56,7 +56,6 @@ public class TelBook {
             List<TelNumber> fromFile = FileSystem.readEntriesFromFile(path);
 
             if (fromFile != null) {
-                //fromFile.forEach(entry -> oTelNumbers.add(entry));
                 oTelNumbers.addAll(fromFile);
             }
         }
